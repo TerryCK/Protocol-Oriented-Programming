@@ -30,8 +30,8 @@ Do exercise using with POP
 
 
 ### Reference
-hacking with swift: Pro Swift
-2015 WWDC Session 408 Protocol Oriented Programming
+- hacking with swift: Pro Swift
+- 2015 WWDC Session 408 Protocol Oriented Programming
 
 
 ### License
