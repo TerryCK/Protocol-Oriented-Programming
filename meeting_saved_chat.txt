@@ -1,0 +1,64 @@
+10:14:30	 From Terry CK : 早喔
+10:17:40	 From kicn_nil : swift 不夜城 line群組～～ＸＤ
+10:18:05	 From cxh : 二手MBP...@@
+10:20:53	 From kicn_nil : enum 也可以 conform protocol
+10:22:59	 From cxh : delegate 有很多功能可用..就很像 VC/VB /C# 等物件..的 "事件"
+10:23:29	 From cxh : Swift delegate func  =  其他語言 的物件的事件
+10:26:22	 From cxh : +9 甩棍!!
+10:26:57	 From cxh : TC 在問嗎??
+10:28:29	 From cxh : 範例::下列就是  UITABLEVIEW delegate ..override func numberOfSections(in tableView: UITableView) -> Intoverride func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+10:31:20	 From cxh : 抽像,封裝,多型,繼承!!
+10:31:48	 From cxh : 讚!!!
+10:47:06	 From cxh : 哀嚎聲!!!
+10:47:25	 From 陳默司 : 熬嗚~~~~~~~~~~~~~~
+10:50:35	 From cxh : protocol 是抽像宣告!!
+10:53:39	 From cxh : 還有二分鐘,.....佛跳牆再作一個..
+10:56:52	 From cxh : swift 宣告,會有順序的問題?? (先用,後宣告,會看不到??)
+10:58:21	 From 陳默司 : 會
+10:59:12	 From 陳默司 : 因為目前寫在同一層
+10:59:31	 From 陳默司 : 如果包在 class, struct 裡面就沒有這個問題
+11:00:00	 From cxh : 包外其他 class , swift 
+11:00:16	 From cxh : 就宣告前方,,應該就沒事了@@
+11:00:21	 From cxh : 感恩@@@
+11:00:34	 From cxh : 整數的 ..平方
+11:00:56	 From cxh : Int
+11:01:03	 From cxh : extension Int 
+11:03:32	 From 陳默司 : extension Numeric {
+    
+    func square() -> Self {
+        return self * self
+    }
+}
+
+2.square()
+2.2.square()
+11:03:47	 From 陳默司 : 通用型 w
+11:04:18	 From cxh : 實體??
+11:05:22	 From cxh :  Numeric 可能是最低層型別
+11:05:47	 From cxh : 全的型..就從  Numeric  生出來
+11:08:05	 From cxh : 建議講  class , Object 
+11:08:26	 From cxh : 十題@@
+11:12:42	 From 陳默司 : Type,  instance
+11:13:17	 From cxh : ..是 type , insrtnce
+11:13:38	 From 陳默司 : Type 開頭大寫以成職業病 XD
+11:18:38	 From cxh : (這看看就好,不高與不要罵我!!我有老母..)有機會要從程式基礎開始打..因為很多同好,對於, 名詞, 抽像,封裝,多型polymorphism,繼承,覆寫(overridde) , 多載 overload,介面 interface 容易搞混,..
+11:19:22	 From 陳默司 : extension Numeric where Self: Comparable {
+    func clamp(low: Self, high: Self) -> Self {
+        if self < low { return low }
+        if self > high { return high }
+        return self
+    }
+}
+11:20:18	 From cxh : 限定 延伸!!
+11:20:40	 From cxh : 沒有..
+11:22:44	 From cxh : 這個有空一定要挖!!可以知道,上下層關係@@
+11:24:56	 From cxh : YES
+11:30:04	 From cxh : contains 
+11:31:31	 From cxh : 明白
+11:31:44	 From cxh : 要鐵支啦
+11:31:49	 From cxh : 同花順不行
+11:33:04	 From cxh : 問一下:這是局部比對,或是全文比對??
+11:34:37	 From cxh : 嗨嗨 ==   嗨嗨    --> ture嗨 ==  嗨嗨    --> true ? false? 我再去玩一下@@感謝
+11:35:22	 From cxh : 嗨嗨 = 改成一個 嗨
+12:45:14	 From 陳默司 : 先去吃飯飯啦 wwwwwww
+12:47:49	 From Terry CK : 謝謝大家～～ 感謝大家花寶貴時間在這次線上讀書會上面，如果有講不好的地方請多見諒，也感謝默司大的補充及提出好問題的大大們
