@@ -14,7 +14,9 @@ Do exercise using with POP
 
 ### Update history
 -----------
+      2017/10/9 Add Functional Programming
       2017/10/1 First Release
+      
                      
 ### Requirement
 -----------

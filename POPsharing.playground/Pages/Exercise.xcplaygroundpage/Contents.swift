@@ -1,4 +1,4 @@
-
+//: [Overview](@previous)
 /*:
  ## Protocol Oriented Programming Exercise
  
@@ -46,6 +46,7 @@ extension NewEmployee {
 
 
 
+
 protocol ProvidesTreatment {
     func treat(name: String)
 }
@@ -73,10 +74,32 @@ bob.treat(name: "cancer")
 
 
 
+
+
+extension Collection where Self.Element: BinaryInteger {
+    
+    typealias Results = (odd: Element, even: Element)
+    
+    func countOddEvenFunctional() -> Results {
+        return reduce((0, 0)) { (result: Results, number) in
+            return number % 2 == 0 ? (result.odd ,result.even + 1) : (result.odd + 1, result.even)
+        }
+    }
+}
+
+
 extension Collection where Iterator.Element == Int {
+    
     func countOddEven() -> (odd: Int, even: Int) {
+        return self.reduce((0, 0)) { (tuple, number) -> (odd: Int, even: Int) in
+            return (number % 2 == 0) ?
+                (tuple.0,    tuple.1 + 1) :
+                (tuple.0 + 1,tuple.1)
+        }
+        
         var odd: Int = 0
         var even: Int = 0
+        
         for number in self {
             if number % 2 == 0 {
                 even += 1
@@ -89,9 +112,15 @@ extension Collection where Iterator.Element == Int {
     }
 }
 
+
 [1,2,3,4,5,6,7].countOddEven()
 [2,4,6,8,10].countOddEven()
 [1,3,5,7,9].countOddEven()
+
+
+[1,2,3,4,5,6,7].countOddEvenFunctional()
+[2,4,6,8,10].countOddEvenFunctional()
+[1,3,5,7,9].countOddEvenFunctional()
 
 /*:
  ## Exercise 1 `square`
@@ -136,7 +165,7 @@ let b = a.square()
 
 extension Numeric where Self: Comparable {
     func clamp(low: Self, high: Self) -> Self {
-        return max( min(self, high), low)
+        return max(min(self, high), low)
     }
 }
 
@@ -165,16 +194,24 @@ extension BinaryInteger {
 
 extension Equatable {
     func matches(array: [Self]) -> Bool {
-        for element in array {
-            if element != self {
-                return false
-            }
+        // method 1: with reduce
+        return array.reduce(true) { (result, accumulation) -> Bool in
+            return result && accumulation == self
         }
+        // method 2: with filter
+        return array.filter{$0 == self}.count == array.count
+        
+        // method 3: with for loop
+        for element in array where element != self {
+            return false
+        }
+        
         return true
     }
 }
 
-
+2.matches(array: [2, 2, 2, 2])
+2.matches(array: [2, 2, 2, 3])
 "嗨嗨".matches(array: ["嗨","嗨嗨"])
 "嗨".matches(array: ["123", "13"])
 
@@ -200,6 +237,15 @@ extension Equatable {
 
 extension Comparable {
     func lessThan(array: [Self]) -> Bool {
+        // method 1: with reduce
+        return array.reduce(true) { (result, accumulation) -> Bool in
+            return result && self < accumulation
+        }
+        
+        // method 2: with filter
+        return array.filter{self < $0}.count == array.count
+        
+        // method 3: with for loop
         for element in array where element <= self {
             return false
         }
@@ -229,6 +275,16 @@ extension Comparable {
 extension Collection where Iterator.Element: Equatable {
     
     func myContain(element: Iterator.Element) -> Bool {
+        
+        // method 1: with reduce
+        return reduce(false) { (result, accumulation) -> Bool in
+            return result || accumulation == element
+        }
+        // method 2: with filter
+        return self.filter{element == $0}.count > 0
+        
+        
+        // method 3: with for loop
         for item in self where item == element {
             return true
         }
@@ -256,9 +312,7 @@ extension Collection where Iterator.Element: Equatable {
 
 extension Collection where Self.Element: BinaryInteger {
     func fuzzyMatches(_ array: [Element]) -> Bool {
-        let usSorted = self.sorted()
-        let otherSorted = array.sorted()
-        return usSorted == otherSorted
+        return sorted() == array.sorted()
     }
 }
 
@@ -277,8 +331,27 @@ extension Collection where Self.Element: BinaryInteger {
  - `["你好嗎","我很好", "太棒了"].averageLength()` return `3`
  */
 
+extension Collection {
+    var countInDouble: Double {
+        return Double(Int(self.count))
+    }
+}
+
 extension Collection where Self.Element == String {
     func averageLength() -> Double {
+        
+        // method 1: with reduce
+        return reduce(0.0) { (sum, str) in
+            return sum + str.countInDouble
+            } / self.countInDouble
+        
+        
+        // method 2: with filter
+        return self.reduce(0, { (sum, str) -> Double in
+            sum + Double(str.count)
+        }) / Double(Int(self.count))
+        
+        // method 3: with for loop
         var count = 0
         var sum = 0
         for item in self {
@@ -305,6 +378,15 @@ extension Collection where Self.Element == String {
 
 extension Collection where Self.Element: BinaryInteger {
     func number(of element: Self.Element) -> Int {
+        
+        // method 1: with reduce
+        return reduce(0) { $0 + ($1 == element ? 1 : 0) }
+        
+        // method 2: with filter
+        return self.filter{$0 == element}.count
+        
+        
+        // method 3: with for loop
         var count = 0
         for item in self where item == element {
             count += 1
@@ -334,6 +416,29 @@ extension Collection where Self.Element: BinaryInteger {
 extension BinaryInteger {
     func countInterger(of elements: [Self]) -> Int {
         let ref: Character = Character(String(describing: self))
+        // method 1: with reduce
+        return elements.reduce(0) { (result, element) -> Int in
+            return result + String(describing: element).reduce(0) { (count, char) -> Int in
+                return (ref == char) ? count + 1 : count
+            }
+        }
+        
+        // method 2: with reduce and simpler closure
+        return elements.reduce(0) {
+            return $0 + String(describing: $1).reduce(0) {
+                return ($1 == ref) ? $0 + 1 : $0
+            }
+        }
+        
+        // method 3:
+        return elements.map {(element) -> Int in
+            return String(describing: element).reduce(0, { (count, char) -> Int in
+                return (ref == char) ? count + 1 : count
+            })
+            }.reduce(0, +)
+        
+        
+        // method 4: with for loop
         var count = 0
         for element in elements {
             String(describing: element).forEach { (charater) in
@@ -344,8 +449,6 @@ extension BinaryInteger {
     }
 }
 
-1.countInterger(of: [1,149583589341,1123])
-
 
 /*:
  ## Exercise 9  `De-duping an array`
@@ -355,8 +458,16 @@ extension BinaryInteger {
  */
 
 
+
 extension Array where Element: Equatable {
+    
     func uniqueValue() -> [Element] {
+        
+        return reduce([Element]()) { (array , element) -> [Element] in
+            return (!array.contains(element)) ? array + [element] : array
+        }
+        
+        //         method 2: with for loop
         var result = [Element]()
         for item in self {
             if !result.contains(item) {
@@ -365,7 +476,6 @@ extension Array where Element: Equatable {
         }
         return result
     }
-    
 }
 
 [1, 2, 4, 5, 6, 7, 1, 2, 4, 3].uniqueValue()
@@ -394,3 +504,14 @@ extension Array where Element: Comparable {
 
 
 //: ## Congradulations you have understood with POP more. and thanks for your attention
+//let numbers = Array(1...10000)
+//let lazyFilter = numbers.lazy.filter { $0 % 2 == 0 }
+//let lazyMap = numbers.lazy.map { $0 * 2 }
+//
+//print(lazyFilter.count)
+//print(lazyFilter.count)
+//print(lazyMap[5000])
+//print(lazyMap[5000])
+
+
+
