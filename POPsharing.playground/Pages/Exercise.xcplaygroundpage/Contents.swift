@@ -280,6 +280,7 @@ extension Collection where Iterator.Element: Equatable {
         return reduce(false) { (result, accumulation) -> Bool in
             return result || accumulation == element
         }
+        
         // method 2: with filter
         return self.filter{element == $0}.count > 0
         
