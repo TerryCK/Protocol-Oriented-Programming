@@ -5,5 +5,6 @@
         <page name='Exercise'/>
         <page name='OOP'/>
         <page name='codeing'/>
+        <page name='POP with functional programming'/>
     </pages>
 </playground>

@@ -1,3 +1,6 @@
+import Foundation
+import PlaygroundSupport
+
 //: [Overview](@previous)
 /*:
  ## Protocol Oriented Programming Exercise
@@ -5,35 +8,207 @@
  
  ### Exercises
  
- 0.  Warm up Counter of even and odd
- 1.  Squaring integers
- 2.  Clamping integers
- 3.  Matching value types
- 4.  Comparing arrays
- 5.  Rewriting contains()
- 6.  Fuzzy array matching
- 7.  Average string length
- 8.  Counting integers
- 9.  De-duping an array
- 10. Array is sorted
+ 0.   Warm up Counter of even and odd
+ 1.  * Squaring integers
+ 2.  * Clamping integers
+ 3.   Matching value types
+ 4.   Comparing arrays
+ 5.   Rewriting contains()
+ 6.   Fuzzy array matching
+ 7.   Average string length
+ 8.   Counting integers
+ 9.   De-duping an array
+ 10. * Array is sorted
  
  ###### for more information :
  
  
  -  WWDC 2015 Section 408 Protocol-Oriented Programming , Apple.
  -  "Pro Swift", Hacking with Swift
+ */
+
+/*
+ 
+ ## Concepts
+ * OOP         POP
+ *      抽象
+ *      封裝
+ *      多型(態)
+ * 單一繼承   多重合成
+ 
+ 
+ functor
+ monand
+ applicative
+ 
  
  */
 
+
+//class Weels {
+//    var brend: String
+//    var color: String
+//}
+
+
+
+protocol CarType {
+    var wheels: Int { get  }
+    func go()
+}
+
+extension CarType {
+    var wheels: Int { return 2 }
+    func go() {
+        print("Car Go in Extension")
+    }
+}
+
+struct CarStruct: CarType {
+    
+}
+let carStruct = CarStruct()
+carStruct.go()
+
+
+
+
+class Car {
+    var wheels: String = ""
+    var color: String = ""
+    var name: String = ""
+    
+    
+    func go() {
+        print("go car")
+        
+    }
+    
+    
+    private func goDetail() {
+    
+    }
+}
+class SideClass {
+    
+}
+
+protocol AirCreft {
+    func canFly()
+}
+
+extension AirCreft {
+    func canFly() {
+        print(" i can fly")
+        
+    }
+}
+
+protocol AirCar: AirCreft, CarType { }
+struct AirCraft: AirCar { }
+
+
+
+
+    
+let airCraft = AirCraft()
+
+airCraft.canFly()
+airCraft.go()
+
+
+
+class Bus: Car {
+    override func go() {
+        print("go bus")
+        
+    }
+}
+
+
+
+let car = Car()
+let bus = Bus()
+
+let arr: [Car] = [bus, car]
+
+for item in arr  {
+    if let x = item as? Bus {
+     print(x.go())
+    }
+}
+
+
+car.go()
+
+bus.go()
+
+
+
+
+
+
+
+//
+//
+//
+//func add(x: Int , y: Int) -> Int {
+//    return x + y
+//}
+//
+//
+//
+//let result = addCurry(x: 1)
+//
+//print(result)
+//
+//
+
+
+
+// 抽象
 protocol Employee {
     func payWages()
 }
 
+class EmployeeClass {
+    func payWages() {
+        print("get pay 22k")
+        howToPay() // in class call
+    }
+    
+    //封裝 存取權限
+    private func howToPay() {
+        print("pay from workshop")
+    }
+    
+}
+let employeeClass = EmployeeClass()
+employeeClass.payWages()
+
+/*
+ 
+ howToPay can not to call outside class
+ employeeClass.howToPay()
+ */
+
+
+
+
+
 extension Employee {
     func payWages() {
         print("get pay 22k")
+        howToPay()
+    }
+    
+    private func howToPay() {
+        print("pay from workshop")
     }
 }
+
+
+
 protocol NewEmployee {
     func payWages()
 }
@@ -76,27 +251,27 @@ bob.treat(name: "cancer")
 
 
 
+
 extension Collection where Self.Element: BinaryInteger {
     
     typealias Results = (odd: Element, even: Element)
     
     func countOddEvenFunctional() -> Results {
         return reduce((0, 0)) { (result: Results, number) in
-            return number % 2 == 0 ? (result.odd ,result.even + 1) : (result.odd + 1, result.even)
+            return number % 2 == 0 ? (result.odd, result.even + 1) : (result.odd + 1, result.even)
         }
     }
 }
 
 
-extension Collection where Self.Iterator.Element: BinaryInteger {
+extension Collection where Iterator.Element == Int {
     
     func countOddEven() -> (odd: Int, even: Int) {
         return self.reduce((0, 0)) { (tuple, number) -> (odd: Int, even: Int) in
-            return (number % 2 == 0) ? (tuple.0,  tuple.1 + 1) :
+            return (number % 2 == 0) ?
+                (tuple.0,    tuple.1 + 1) :
                 (tuple.0 + 1,tuple.1)
         }
-        
-        
         
         var odd: Int = 0
         var even: Int = 0
@@ -112,10 +287,7 @@ extension Collection where Self.Iterator.Element: BinaryInteger {
         return (odd, even)
     }
 }
-class Model {}
-//func countX(Array: [Model]) -> (Int, Int, Int) {
-//
-//}
+
 
 [1,2,3,4,5,6,7].countOddEven()
 [2,4,6,8,10].countOddEven()
@@ -202,7 +374,6 @@ extension Equatable {
         return array.reduce(true) { (result, accumulation) -> Bool in
             return result && accumulation == self
         }
-        
         // method 2: with filter
         return array.filter{$0 == self}.count == array.count
         
@@ -287,9 +458,11 @@ extension Collection where Iterator.Element: Equatable {
         }
         
         // method 2: with filter
-        return self.filter{element == $0}.count > 0
+        return self.filter{ element == $0 }.count > 0
         
-        
+        self.map { (element) -> Element in
+            return element
+        }
         // method 3: with for loop
         for item in self where item == element {
             return true
@@ -297,7 +470,9 @@ extension Collection where Iterator.Element: Equatable {
         return false
     }
 }
-
+let x: Int? = 1
+let y = x.map { $0 + 1 }
+let z = x.flatMap { $0 + 1 }
 
 [1,1,1,1].myContain(element: 1)
 [1,2,3,4].myContain(element: 1)
@@ -388,7 +563,6 @@ extension Collection where Self.Element: BinaryInteger {
         // method 1: with reduce
         return reduce(0) { $0 + ($1 == element ? 1 : 0) }
         
-        
         // method 2: with filter
         return self.filter{$0 == element}.count
         
@@ -471,7 +645,7 @@ extension Array where Element: Equatable {
     func uniqueValue() -> [Element] {
         
         return reduce([Element]()) { (array , element) -> [Element] in
-            return (!array.contains(element)) ? array + [element] : array
+            return !array.contains(element) ? array + [element] : array
         }
         
         //         method 2: with for loop
@@ -505,25 +679,8 @@ extension Array where Element: Comparable {
     }
 }
 
-let arrayInt = [1,2,3,4,5,6]
 [1,2,3,4].isSoted()
 [2,1,4,2,5].isSoted()
-
-let xas = arrayInt.map{ $0 * 2 }
-print(xas)
-let optionalInt:Int? = 2
-
-print(optionalInt)
-let results222 = optionalInt.map { $0 + 2 }.map { $0 + 5 }
-print(results222)
-
-let closure = { element in
-    return element + 2
-}
-closure(2)
-
-let g = optionalInt.map(closure).map(closure).map(closure)
-
 
 
 
@@ -536,6 +693,7 @@ let g = optionalInt.map(closure).map(closure).map(closure)
 //print(lazyFilter.count)
 //print(lazyMap[5000])
 //print(lazyMap[5000])
+
 
 
 
