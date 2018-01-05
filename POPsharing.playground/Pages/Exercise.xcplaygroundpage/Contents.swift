@@ -5,17 +5,17 @@
  
  ### Exercises
  
- 0.  Warm up Counter of even and odd
- 1.  Squaring integers
- 2.  Clamping integers
- 3.  Matching value types
- 4.  Comparing arrays
- 5.  Rewriting contains()
- 6.  Fuzzy array matching
- 7.  Average string length
- 8.  Counting integers
- 9.  De-duping an array
- 10. Array is sorted
+    0.  Warm up Counter of even and odd
+    1.  Squaring integers
+    2.  Clamping integers
+    3.  Matching value types
+    4.  Comparing arrays
+    5.  Rewriting contains()
+    6.  Fuzzy array matching
+    7.  Average string length
+    8.  Counting integers
+    9.  De-duping an array
+    10. Array is sorted
  
  ###### for more information :
  
@@ -24,54 +24,6 @@
  -  "Pro Swift", Hacking with Swift
  
  */
-
-protocol Employee {
-    func payWages()
-}
-
-extension Employee {
-    func payWages() {
-        print("get pay 22k")
-    }
-}
-protocol NewEmployee {
-    func payWages()
-}
-
-extension NewEmployee {
-    func payWages() {
-        print("get pay 33k")
-    }
-}
-
-
-
-
-protocol ProvidesTreatment {
-    func treat(name: String)
-}
-
-
-extension ProvidesTreatment {
-    func treat(name: String) {
-        print(" i have treated \(name)")
-    }
-}
-
-
-
-struct Slave: NewEmployee, ProvidesTreatment { }
-struct Manager: NewEmployee { }
-
-
-let bill = Manager()
-
-bill.payWages()
-
-let bob = Slave()
-
-bob.treat(name: "cancer")
-
 
 
 
@@ -89,6 +41,13 @@ extension Collection where Self.Element: BinaryInteger {
 
 
 extension Collection where Self.Iterator.Element: BinaryInteger {
+    var isEven: Bool { return Int(Element) % 2 == 0 }
+    
+    func countOddEvenWithReduce() -> (odd: Int, even: Int) {
+        return reduce((0, 0)) {
+            return isEven ? ($0.0, $0.1 + 1) : ($0.0 + 1, $0.1)
+        }
+    }
     
     func countOddEven() -> (odd: Int, even: Int) {
         return self.reduce((0, 0)) { (tuple, number) -> (odd: Int, even: Int) in
@@ -97,6 +56,7 @@ extension Collection where Self.Iterator.Element: BinaryInteger {
         }
         
         
+       
         
         var odd: Int = 0
         var even: Int = 0
@@ -122,9 +82,9 @@ class Model {}
 [1,3,5,7,9].countOddEven()
 
 
-[1,2,3,4,5,6,7].countOddEvenFunctional()
-[2,4,6,8,10].countOddEvenFunctional()
-[1,3,5,7,9].countOddEvenFunctional()
+[1,2,3,4,5,6,7].countOddEvenWithReduce()
+[2,4,6,8,10].countOddEvenWithReduce()
+[1,3,5,7,9].countOddEvenWithReduce()
 
 /*:
  ## Exercise 1 `square`

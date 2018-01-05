@@ -1,8 +1,8 @@
 
 import Foundation
 
-//: [POP Exercises](@next)
 /*:
+ [POP Exercises](@next)
  # Overview
  ## What is POP?
  ### POP : Protocol Oriented Programming
@@ -30,7 +30,20 @@ struct MyStruct : MyProtocol { /* implement here */ }
 enum   MyEnum   : MyProtocol { /* implement here */ }
 class  MyClass  : MyProtocol { /* implement here */ }
 
-//: ## Defaults
+
+/*:
+ ## Protocol Extensions
+ ### Introduced @ Swift 2.0 WWDC 2015
+ 
+ ### Implement the protocol as default
+ 
+ ### Extension syntax recap
+ 
+ 1. Computer properties
+ 2. Methods
+ 3. Initializers
+ 4. Subscripts
+ */
 extension MyProtocol { /* implement here */ }
 
 /*:
@@ -88,6 +101,7 @@ let instance = FullNameClass()
 instance.getFullName()
 /*:
   ## Naming style of protocol
+ 
  ### Suffix: -able, -Protocol, -DataSource, -Delegate
 
   ## General Protocols:
@@ -97,17 +111,24 @@ instance.getFullName()
     4. Equatable      :    ==, !=
     5. Hashable       :    Inherits from Equatable
     6. Numeric        :    All Number, integers, floating-point
+ 
   ## Optional requirement
  ### It's only for Classes with `@objc` protocol attribute
  */
 
 
-/*:
-  ## Protocol Extensions
- ### Introduced @ Swift 2.0 WWDC 2015
- ### Defualt property & methods
- */
 
+/*:
+ ## Protocol Extensions
+ ### Introduced @ Swift 2.0 WWDC 2015
+ 
+ ### Extension syntax recap
+ 
+    1. Computer properties
+    2. Methods
+    3. Initializers
+    4. Subscripts
+ */
 extension MyProtocol {
     var computerProperty: String { return "it's a ComputerProperty" }
     func method() -> String      { return "it's a default methods"}
@@ -212,9 +233,8 @@ people.append(federer)
 print("\nAfter people append ferderer\n")
 people.forEach { print("\($0.firstName) is a \($0.vocation)") }
 
-
 /*:
- Let's play with POP
+ [Let's play with POP](@next)
  */
 
 
