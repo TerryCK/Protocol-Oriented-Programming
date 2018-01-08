@@ -17,12 +17,13 @@
     9.  De-duping an array
     10. Array is sorted
  
- ###### for more information :
  
+ ###### Read more :
  
- -  WWDC 2015 Section 408 Protocol-Oriented Programming , Apple.
- -  "Pro Swift", Hacking with Swift
- 
+ -  WWDC 2015 Section 408 Protocol-Oriented Programming, Apple. https://goo.gl/KWu57f
+ -  "Pro Swift", Hacking with Swift, Paul Hudson. https://goo.gl/Urg7ht
+ -  "Introducing Protocol-Oriented Programming in Swift 3", Raywenderlich. https://www.raywenderlich.com/?p=148448
+ - "Swift 4 Protocol-Oriented Programming - Third Edition: Bring predictability, performance, and productivity to your Swift applications", Jon Hoffman.
  */
 
 
@@ -471,18 +472,7 @@ let arrayInt = [1,2,3,4,5,6]
 
 let xas = arrayInt.map{ $0 * 2 }
 print(xas)
-let optionalInt:Int? = 2
 
-print(optionalInt)
-let results222 = optionalInt.map { $0 + 2 }.map { $0 + 5 }
-print(results222)
-
-let closure = { element in
-    return element + 2
-}
-closure(2)
-
-let g = optionalInt.map(closure).map(closure).map(closure)
 
 
 
