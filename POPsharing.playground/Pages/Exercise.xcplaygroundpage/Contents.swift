@@ -1,3 +1,5 @@
+
+import Foundation
 //: [Overview](@previous)
 /*:
  ## Protocol Oriented Programming Exercise
@@ -18,16 +20,22 @@
     10. Array is sorted
  
  
+ 
+ 
  ###### Read more :
  
- -  WWDC 2015 Section 408 Protocol-Oriented Programming, Apple. https://goo.gl/KWu57f
- -  "Pro Swift", Hacking with Swift, Paul Hudson. https://goo.gl/Urg7ht
- -  "Introducing Protocol-Oriented Programming in Swift 3", Raywenderlich. https://www.raywenderlich.com/?p=148448
- - "Swift 4 Protocol-Oriented Programming - Third Edition: Bring predictability, performance, and productivity to your Swift applications", Jon Hoffman.
+    1.  WWDC 2015 Section 408 Protocol-Oriented Programming, Apple. https://goo.gl/KWu57f
+    2.  "Pro Swift", Hacking with Swift, Paul Hudson. https://goo.gl/Urg7ht
+    3.  "Introducing Protocol-Oriented Programming in Swift 3", Raywenderlich. https://www.raywenderlich.com/?p=148448
+    4. "Swift 4 Protocol-Oriented Programming - Third Edition: Bring predictability, performance, and productivity to your Swift applications", Jon Hoffman.
  */
 
-
-
+/*:
+ ## Warm up Counter of even and odd
+ - `[1,2,3,4,5,6,7].countOddEven()` return `(odd 4, even 3)`
+ - `[2,4,6,8,10].countOddEven()` return `(odd 0, even 5)`
+ - `[1,3,5,7,9].countOddEven()` return `(odd 5, even 0)`
+ */
 
 extension Collection where Self.Element: BinaryInteger {
     
@@ -42,14 +50,7 @@ extension Collection where Self.Element: BinaryInteger {
 
 
 extension Collection where Self.Iterator.Element: BinaryInteger {
-    var isEven: Bool { return Int(Element) % 2 == 0 }
-    
-    func countOddEvenWithReduce() -> (odd: Int, even: Int) {
-        return reduce((0, 0)) {
-            return isEven ? ($0.0, $0.1 + 1) : ($0.0 + 1, $0.1)
-        }
-    }
-    
+   
     func countOddEven() -> (odd: Int, even: Int) {
         return self.reduce((0, 0)) { (tuple, number) -> (odd: Int, even: Int) in
             return (number % 2 == 0) ? (tuple.0,  tuple.1 + 1) :
@@ -73,19 +74,14 @@ extension Collection where Self.Iterator.Element: BinaryInteger {
         return (odd, even)
     }
 }
-class Model {}
-//func countX(Array: [Model]) -> (Int, Int, Int) {
-//
-//}
+
 
 [1,2,3,4,5,6,7].countOddEven()
 [2,4,6,8,10].countOddEven()
 [1,3,5,7,9].countOddEven()
 
 
-[1,2,3,4,5,6,7].countOddEvenWithReduce()
-[2,4,6,8,10].countOddEvenWithReduce()
-[1,3,5,7,9].countOddEvenWithReduce()
+
 
 /*:
  ## Exercise 1 `square`
