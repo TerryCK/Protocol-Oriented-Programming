@@ -165,7 +165,7 @@ extension Equatable {
         }
         
         // method 2: with filter
-        return array.filter{$0 == self}.count == array.count
+        return array.filter{ $0 == self }.count == array.count
         
         // method 3: with for loop
         for element in array where element != self {
