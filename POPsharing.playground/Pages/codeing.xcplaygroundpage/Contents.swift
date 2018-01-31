@@ -22,7 +22,7 @@ typealias Terry = String
 
 protocol Outline {
     
-    func introduct(with: Protocol, by sharer: Terry)    ->  Concept
+    func introduce(with: Protocol, by sharer: Terry)    ->  Concept
     
     func whatsDifferent(between: Object, and: Protocol) ->  Summary
     

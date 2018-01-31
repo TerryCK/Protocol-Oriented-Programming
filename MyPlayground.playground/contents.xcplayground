@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios'>
+    <pages>
+        <page name='Protocol+Extension'/>
+        <page name='Builder Pattern'/>
+        <page name='Array'/>
+        <page name='Untitled Page 2'/>
+        <page name='Untitled Page 3'/>
+        <page name='Pattern Match'/>
+        <page name='Untitled Page'/>
+        <page name='convert'/>
+        <page name='Untitled Page 4'/>
+        <page name='Untitled Page 5'/>
+        <page name='Protocol inheritance'/>
+        <page name='test+String'/>
+        <page name='debug大會'/>
+        <page name='anyObject'/>
+        <page name='Untitled Page 6'/>
+        <page name='dataSource'/>
+        <page name='Untitled Page 7'/>
+        <page name='Protocols method dispatch'/>
+        <page name='protocol polymorphism'/>
+    </pages>
+</playground>
