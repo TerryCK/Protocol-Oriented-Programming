@@ -62,6 +62,14 @@ terry.isMetabolism      // true
 terry.isReproduction    // true
 
 
+switch terry {
+    
+case is Person:
+    print("isPerson")
+default:
+    print("not Person")
+}
+
 
 // true
 //

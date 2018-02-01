@@ -22,5 +22,6 @@
         <page name='protocol polymorphism'/>
         <page name='Enum'/>
         <page name='POP sharing'/>
+        <page name='functional Programming'/>
     </pages>
 </playground>
