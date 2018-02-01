@@ -20,5 +20,7 @@
         <page name='Untitled Page 7'/>
         <page name='Protocols method dispatch'/>
         <page name='protocol polymorphism'/>
+        <page name='Enum'/>
+        <page name='POP sharing'/>
     </pages>
 </playground>

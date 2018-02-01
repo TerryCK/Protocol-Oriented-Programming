@@ -67,9 +67,3 @@ MyStruct.myMethod()
 
 
 
-
-
-
-extension Sequence {
-    
-}
