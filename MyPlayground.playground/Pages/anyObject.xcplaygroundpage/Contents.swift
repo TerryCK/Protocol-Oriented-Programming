@@ -7,7 +7,7 @@ func aFunc<T>(_ x: T) {
 
 //add test
 aFunc("String")
-
+//change
 var x: AnyObject? = 1 as AnyObject
 
 let result = x as? Int
