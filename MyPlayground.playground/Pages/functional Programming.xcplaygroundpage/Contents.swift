@@ -27,7 +27,10 @@ func >>> <T, U, V>(lhs: @escaping (T) -> U, rhs: @escaping (U) -> V) -> (T) -> V
 
 
 
-
+struct MyStruct {
+    var name: String
+    var cars: [String]
+}
 let terry = (name: "Terry", cars: ["tesla, lamborghini"])
 let bob = (name: "Bob", cars: ["honda, toyota"])
 
@@ -38,5 +41,5 @@ people.map { $0.cars }.flatMap { $0 }.forEach { print($0) }
 
 print("\n case 2 \n")
 people.map { $0.cars }.joined().forEach { print($0) }
-
+let x = people.map(MyStruct.init)
 
