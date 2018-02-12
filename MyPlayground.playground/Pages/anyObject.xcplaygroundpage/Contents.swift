@@ -5,7 +5,7 @@ func aFunc<T>(_ x: T) {
     print(x as! String)
 }
 
-
+//add test
 aFunc("String")
 
 var x: AnyObject? = 1 as AnyObject
